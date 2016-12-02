@@ -37,6 +37,8 @@ else if(process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.resolve(__dirname, 'dist')));
 }
 
+var port = process.env.PORT || 3000;
+
 //Yelp API change to env variable
 const yelpKey = process.env.YELP_KEY;
 
@@ -95,7 +97,6 @@ app.post('/bars', (req, res) => {
 			}
 			barArr.push(newObj);
 		});
-		console.log(barArr);
 		res.json(barArr);
 	});
 });
@@ -184,10 +185,10 @@ app.get('/checkIp', function(req, res) {
 
 app.get('*', middleware);
 
-app.listen(3000, '0.0.0.0', (err) => {
+app.listen(port, '0.0.0.0', (err) => {
 	if(err) {
 		console.error(err);
 	} else {
-		console.info('Listening at http://localhost:3000');
+		console.info('Listening at ' + port);
 	}
 });
